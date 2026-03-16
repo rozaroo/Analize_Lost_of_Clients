@@ -1,7 +1,6 @@
 import pandas as pd 
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
@@ -50,8 +49,8 @@ print(y_train.shape) # Expected (2333,)
 print(y_test.shape) # Expected (1000,)
 
 # Summary statistics for churned vs. non-churned customers
-churned = df[df['churn'] == 1]
-non_churned = df[df['churn'] == 0]
+churned = df[df['Churn'] == 1]
+non_churned = df[df['Churn'] == 0]
 
 # Print average tenure
 print("Average tenure (churned customers):",churned['tenure'].mean())
@@ -88,12 +87,6 @@ plt.ylabel('Monthly Charge')
 plt.suptitle('')  # Remove the default suptitle
 plt.show()
 
-x_train, x_test, y_train, y_test = train_test_split(
-    features,
-    target_variable,
-    test_size=0.2,
-    random_state=42
-)
 # Create an instance of the Logistic Regression model
 model = LogisticRegression(max_iter = 1000)
 
@@ -114,3 +107,6 @@ print(f"Accuracy: {accuracy}") # Expected: approximately 0.867
 print(f"Precision: {precision}") # Expected: approximately 0.604
 print(f"Recall: {recall}") # Expected: approximately 0.203
 print(f"F1 Score: {f1}") # Expected: approximately 0.304
+
+coefficients = pd.DataFrame({"Feature": x.columns, "Coefficient": model.coef_[0]})
+print(coefficients.sort_values(by="Coefficient",ascending=False))
