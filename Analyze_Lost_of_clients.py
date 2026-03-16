@@ -7,7 +7,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 df = pd.read_csv("customer_churn.csv")
 
 # Display the first 5 rows of the DataFrame
-df.head()
+print(df.head())
 # Display column names and data types
 df.info()
 # Get summary statistics of numerical columns
@@ -57,7 +57,7 @@ print("Average tenure (churned customers):",churned['tenure'].mean())
 print("Average tenure (non-churned customers):",non_churned['tenure'].mean())
 
 # Bar chart for contract renewal vs churn
-churn_counts = df.groupby(['ContractRenewal','churn']).size().unstack()
+churn_counts = df.groupby(['ContractRenewal','Churn']).size().unstack()
 
 # Chart options provided
 churn_counts.plot(kind='bar', stacked=True)
@@ -78,7 +78,7 @@ plt.legend()
 plt.show()
 
 # Box plot for monthly charges
-df.boxplot(column='MonthlyCharge',by='churn')
+df.boxplot(column='MonthlyCharge',by='Churn')
 
 # Chart options provided
 plt.title('Monthly Charges vs. Churn')
